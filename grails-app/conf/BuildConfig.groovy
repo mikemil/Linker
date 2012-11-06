@@ -10,7 +10,7 @@ grails.project.dependency.resolution = {
     // inherit Grails' default dependencies
     inherits("global") {
         // uncomment to disable ehcache
-        // excludes 'ehcache'
+         excludes 'ehcache'
     }
     log "error" // log level of Ivy resolver, either 'error', 'warn', 'info', 'debug' or 'verbose'
     checksums true // Whether to verify checksums on resolve
@@ -37,10 +37,11 @@ grails.project.dependency.resolution = {
     }
 
     plugins {
+		//compile (":twitter-bootstrap:2.0.2.25") { excludes 'svn' }
         runtime ":jquery:1.7.1"
         runtime ":resources:1.1.5"
-        runtime ':twitter-bootstrap:2.0.0.16'
-		runtime ':fields:1.0.1'
+        runtime ':twitter-bootstrap:2.1.1'
+		runtime ':fields:1.3'
         build ":tomcat:$grailsVersion"
     }
 }

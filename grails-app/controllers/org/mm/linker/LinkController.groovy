@@ -7,11 +7,15 @@ class LinkController {
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 
     def index() {
+		params.sort = 'lastUpdated'
+		params.order = 'desc'
         redirect(action: "list", params: params)
     }
 
     def list() {
         params.max = Math.min(params.max ? params.int('max') : 10, 100)
+		//params.sort = 'lastUpdated'
+		//params.order = 'desc'
         [linkInstanceList: Link.list(params), linkInstanceTotal: Link.count()]
     }
 
@@ -20,12 +24,9 @@ class LinkController {
     }
 
     def save() {
-		//def tags = params.tags?.split() as Set
 		def tags = params.tags?.split() as HashSet
-		println "tags: ${tags}"
         def linkInstance = new Link(params)
 		linkInstance.tags = tags
-		println 'hasMany: '+linkInstance.tags.getClass().getName()
         if (!linkInstance.save(flush: true)) {
             render(view: "create", model: [linkInstance: linkInstance])
             return
@@ -76,10 +77,15 @@ class LinkController {
             }
         }
 
-        linkInstance.properties = params
         def tags = params.tags.split() as Set
-        println "tags: ${tags}"
+        //linkInstance.properties = params  // todo need to 'blacklist' the tags field
+        //println "tags: ${tags}"
+        //def tags = params.tags.split() as Set
+        //println "tags: ${tags}"
         linkInstance.tags = tags
+		linkInstance.user = params.user
+		linkInstance.rating = params.rating.toInteger()
+		linkInstance.summary = params.summary
 
         if (!linkInstance.save(flush: true)) {
             render(view: "edit", model: [linkInstance: linkInstance])

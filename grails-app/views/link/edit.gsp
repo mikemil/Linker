@@ -30,9 +30,41 @@
 			<g:form method="post" >
 				<g:hiddenField name="id" value="${linkInstance?.id}" />
 				<g:hiddenField name="version" value="${linkInstance?.version}" />
-				<fieldset class="form">
-					<f:all bean="linkInstance"/>
-				</fieldset>
+				<div class="control-group ">
+					<label class="control-label" for="urlLink">Url Link</label>
+					<div class="controls">
+						<input type="url" name="urlLink" value="${linkInstance?.urlLink}" id="urlLink" />
+					</div>
+				</div>
+
+				<div class="control-group ">
+					<label class="control-label" for="rating">Rating</label>
+					<div class="controls">
+						<input type="range" name="rating" value="${linkInstance?.rating}" required="" min="1" max="5" id="rating" />
+					</div>
+				</div>
+				
+				<div class="control-group ">
+					<label class="control-label" for="summary">Summary</label>
+					<div class="controls">
+						<input type="text" name="summary" value="${linkInstance?.summary}" required="" id="summary" />
+					</div>
+				</div>
+
+				<div class="control-group ">
+					<label class="control-label" for="user">User</label>
+					<div class="controls">
+						<input type="text" name="user" value="${linkInstance?.user}" required="" id="user" />
+					</div>
+				</div>
+						
+				<div class="control-group ">
+					<label class="control-label" for="tags">Tags</label>
+					<div class="controls">
+						<input type="text" name="tags" value="${linkInstance?.tags}" id="tags" />
+					</div>
+				</div>
+				
 				<fieldset class="buttons">
 					<g:actionSubmit class="save" action="update" value="${message(code: 'default.button.update.label', default: 'Update')}" />
 					<g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" formnovalidate="" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />

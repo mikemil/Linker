@@ -41,8 +41,11 @@
 					<a class="brand" href="${createLink(uri: '/')}">Linker</a>
 
 					<div class="nav-collapse">
-						<ul class="nav">							
+						<ul class="nav">	
 							<li<%= request.forwardURI == "${createLink(uri: '/')}" ? ' class="active"' : '' %>><a href="${createLink(uri: '/')}">Home</a></li>
+						</ul>
+						<ul class="nav">							
+							<li<%= request.forwardURI == "${createLink(controller:'search', action:'search')}" ? ' class="active"' : '' %>><a href="${createLink(controller:'search', action:'search', params:[max:10, offset:0, order: 'desc', sort:'lastUpdated'])} ">Search</a></li>
 						</ul>
 					</div>
 					<form class="navbar-search pull-right" action="/Linker/link/search">

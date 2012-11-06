@@ -18,6 +18,10 @@ class Link {
 		user(blank:false)
     }
 	
+	String toString() {
+		user + ':' + urlLink + ':' + rating + ':' + tagsToString()
+	}
+	
 	String tagsToString() {
 		if (tags)
 		   (tags as Object[]).join(' ').toString()

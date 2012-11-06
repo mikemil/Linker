@@ -40,7 +40,7 @@
 				<bootstrap:alert class="alert-info">${flash.message}</bootstrap:alert>
 				</g:if>
 
-				<dl>
+				<dl class="dl-horizontal">
 					<g:if test="${linkInstance?.urlLink}">
 						<dt><g:message code="link.urlLink.label" default="Url Link" /></dt>
 						
@@ -52,8 +52,6 @@
 						<dt><g:message code="link.rating.label" default="Rating" /></dt>
 						
 							<dd><g:showRating rating="${linkInstance.rating}"/></dd>
-							<!--<dd><g:fieldValue bean="${linkInstance}" field="rating"/></dd> -->
-							
 						
 					</g:if>
 				
