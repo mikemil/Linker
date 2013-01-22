@@ -9,43 +9,49 @@ class SearchCommand implements Serializable {
 }
 
 
-// problems searching when mutliple criteria passed - check how I am creating the criteria - 
+// problems searching when multiple criteria passed - check how I am creating the criteria - 
 // do I need to add an AND clause or something?
 
 class SearchController {
 
 	def search() {
-		if ((!params.user) && (!params.tags) && (!params.rating)) {
+		if ((!params.user) && (!params.tag) && (!params.rating)) {
 			//flash.message = 'No search parameters provided!'
 			return[:]
 		}
-		//println "search params: $params"
+		println "search params: $params"
 		def criteria = Link.createCriteria()
 		def resultList = criteria.list (sort:params.sort, order: params.order ) {
+			params.max = Math.min(params.max ? params.int('max') : 10, 100)
 			maxResults(params?.max.toInteger())
+			params.offset = params.offset ? params.int('offset') : 0
 			firstResult(params?.offset.toInteger())
 			if (params.user)
 				eq('user', params.user)
 			if (params.rating)
 				eq('rating', Integer.valueOf(params.rating))
-			if (params.tags) {
-				eq('tags', params.tags)
+			if (params.tag) {
+				eq('tags', params.tag)
 			}
 		}
+		println 'resultList='+resultList.size()
 		def countCriteria = Link.createCriteria() 
 		def total = countCriteria.count{
 			if (params.user)
 				eq('user', params.user)
 			if (params.rating)
 				eq('rating', Integer.valueOf(params.rating))
-			if (params.tags) {
-				eq('tags', params.tags)
+			if (params.tag) {
+				eq('tags', params.tag)
 			}
 		}
+		println 'total='+total
 		if (resultList.size() == 0) {
 			flash.message = 'No results found!'
+		} else {
+			println resultList
 		}
-		[linkInstanceList: resultList, linkInstanceTotal: total]
+		[linkInstanceList: resultList, linkInstanceTotal: total, user:params.user, tag:params.tag, rating:params.rating]
 	}
 	
 //	def searchOld() {

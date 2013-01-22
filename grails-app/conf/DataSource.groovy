@@ -4,6 +4,6 @@ grails {
     port = 27017 
     //username = ”user” 
     //password=”secretpassword” 
-    databaseName = 'links'
+    databaseName = 'link'
   } 
 }
