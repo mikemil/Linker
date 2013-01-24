@@ -24,7 +24,7 @@
                             <td>${linkInstance?.tagsToString()}</td>
                             <td>${fieldValue(bean: linkInstance, field: "summary")}</td>
                             <td class="link">
-                                <g:link action="show" id="${linkInstance.id}" class="btn btn-small">Show &raquo;</g:link>
+                                <g:link action="show" id="${linkInstance.id}" controller="link" class="btn btn-small">Show &raquo;</g:link>
                             </td>
                         </tr>
                     </g:each>
